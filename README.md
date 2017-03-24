@@ -6,6 +6,6 @@ Wetterstation mit Raspberry Pi, Sensortag und kleinem Bildschirm, um die aktuell
 ```bash
 # installieren der benötigten Packete und Librarys
 sudo apt install python-pip virtualenvwrapper libglib2.0-dev
-mkvirtualenv wetterstation  # OPTIONAL: create virtualenv
-pip install -r bluepy
+mkvirtualenv wetterstation  # OPTIONAL: virtualenv erstellen
+pip install bluepy
 ```
