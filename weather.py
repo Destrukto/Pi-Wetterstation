@@ -581,7 +581,7 @@ class SmDisplay:
 		else:          s = "Sonnenaufgang in (H:Min): %d:%02d" % stot( tDaylight )
 		self.sPrint( s, sfont, xmax*0.05, 6, lc )
 
-		s = "Letztes update: %s" % time.strftime(self.fLastUpdate, '%d.%m.&%Y %H:%M %Z' )
+		s = "Letztes update: %s" % self.fLastUpdate.strftime( '%d.%m.&%Y %H:%M %Z' )
 		self.sPrint( s, sfont, xmax*0.05, 7, lc )
 
 		cc = 'current_conditions'
