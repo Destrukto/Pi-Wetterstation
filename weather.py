@@ -136,8 +136,8 @@ class SmDisplay:
 		self.icon = [ 0, 0, 0, 0 ]
 		self.rain = [ '', '', '', '' ]
 		self.temps = [ ['',''], ['',''], ['',''], ['',''] ]
-		self.sunrise = '7:00 AM'
-		self.sunset = '8:00 PM'
+		self.sunrise = '7:00'
+		self.sunset = '8:00'
 		"""
 		# Larger Display
 		self.xmax = 800 - 35
@@ -270,7 +270,7 @@ class SmDisplay:
 		font = pygame.font.SysFont( fn, int(ymax*th), bold=1 )	# Regular Font
 		sfont = pygame.font.SysFont( fn, int(ymax*sh), bold=1 )	# Small Font for Seconds
 
-		tm1 = time.strftime( "%a, %b %d   %I:%M", time.localtime() )	# 1st part
+		tm1 = time.strftime( "%a, %b %d   %H:%M", time.localtime() )	# 1st part
 		tm2 = time.strftime( "%S", time.localtime() )					# 2nd
 		tm3 = time.strftime( " %P", time.localtime() )					#
 
@@ -478,7 +478,7 @@ class SmDisplay:
 		font = pygame.font.SysFont( fn, int(ymax*th), bold=1 )		# Regular Font
 		sfont = pygame.font.SysFont( fn, int(ymax*sh), bold=1 )		# Small Font for Seconds
 
-		tm1 = time.strftime( "%a, %b %d   %I:%M", time.localtime() )	# 1st part
+		tm1 = time.strftime( "%a, %b %d   %H:%M", time.localtime() )	# 1st part
 		tm2 = time.strftime( "%S", time.localtime() )			# 2nd
 		tm3 = time.strftime( " %P", time.localtime() )			#
 
@@ -545,7 +545,7 @@ class SmDisplay:
 		font = pygame.font.SysFont( fn, int(ymax*thl), bold=1 )		# Regular Font
 		sfont = pygame.font.SysFont( fn, int(ymax*sh), bold=1 )		# Small Font
 
-		tm1 = time.strftime( "%a, %b %d   %I:%M", time.localtime() )	# 1st part
+		tm1 = time.strftime( "%a, %b %d   %H:%M", time.localtime() )	# 1st part
 		tm2 = time.strftime( "%S", time.localtime() )			# 2nd
 		tm3 = time.strftime( " %P", time.localtime() )			#
 
