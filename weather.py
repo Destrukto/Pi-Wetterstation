@@ -637,7 +637,7 @@ def Daylight( sr, st ):
 
 	# From a string like '8:00 PM', build a datetime variable for
 	# today with the hour and minute set to sunset.
-	t = time.strptime( myDisp.sunset, '%H:%M' )
+	t = time.strptime( myDisp.sunset, '%I:%M %p' )
 	tSunset = tNow					# Copy time now.
 	# Overwrite hour and minute with sunset hour and minute.
 	tSunset = tSunset.replace( hour=t.tm_hour, minute=t.tm_min, second=0 )
