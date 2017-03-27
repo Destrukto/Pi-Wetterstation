@@ -81,9 +81,8 @@ def reconnect(tag):
 def main():
     print('Connecting to {}'.format(SENSORTAG_ADDRESS))
     tag = SensorTag(SENSORTAG_ADDRESS)
-    worksheet = login_open_sheet(GDOCS_OAUTH_JSON, GDOCS_SPREADSHEET_NAME, GDOCS_WORKSHEET_NAME)
 
-    print('Logging sensor measurements to {0} every {1} seconds.'.format(GDOCS_SPREADSHEET_NAME, FREQUENCY_SECONDS))
+    print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
     print('Press Ctrl-C to quit.')
     while True:
         # get sensor readings
