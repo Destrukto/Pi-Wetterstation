@@ -173,9 +173,9 @@ class SmDisplay:
 		self.ymax = 320 - 5
 		self.scaleIcon = False		# No icon scaling needed.
 		self.iconScale = 1.0
-		self.subwinTh = 0.05		# Sub window text height
+		self.subwinTh = 0.06		# Sub window text height
 		self.tmdateTh = 0.105		# Time & Date Text Height
-		self.tmdateSmTh = 0.055
+		self.tmdateSmTh = 0.06
 		self.tmdateYPos = 1		# Time & Date Y Position
 		self.tmdateYPosSm = 8		# Time & Date Y Position Small
 		self.errCount = 0
