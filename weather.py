@@ -274,7 +274,7 @@ class SmDisplay:
 		rtm2 = sfont.render( tm2, True, lc )
 		(tx2,ty2) = rtm2.get_size()
 
-		tp = xmax / 2 - (tx1 + tx2 + tx3) / 2
+		tp = xmax / 2 - (tx1 + tx2) / 2
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
 
@@ -478,7 +478,7 @@ class SmDisplay:
 		rtm2 = sfont.render( tm2, True, lc )
 		(tx2,ty2) = rtm2.get_size()
 
-		tp = xmax / 2 - (tx1 + tx2 + tx3) / 2
+		tp = xmax / 2 - (tx1 + tx2) / 2
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
 
@@ -541,7 +541,7 @@ class SmDisplay:
 		rtm2 = sfont.render( tm2, True, lc )
 		(tx2,ty2) = rtm2.get_size()
 
-		tp = xmax / 2 - (tx1 + tx2 + tx3) / 2
+		tp = xmax / 2 - (tx1 + tx2) / 2
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
 
