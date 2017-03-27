@@ -265,7 +265,7 @@ class SmDisplay:
 	def disp_weather(self):
 		# Fill the screen with black
 		self.screen.fill( (0,0,0) )
-		xmin = 5
+		xmin = 10
 		xmax = self.xmax
 		ymax = self.ymax
 		lines = 5
@@ -324,7 +324,7 @@ class SmDisplay:
 		dh = 0.05    # Degree Symbol Height
 		so = 0.01    # Degree Symbol Yaxis Offset
 		xp = 0.52    # Xaxis Start Pos
-		x2 = 0.78    # Second Column Xaxis Start Pos
+		x2 = 0.85    # Second Column Xaxis Start Pos
 
 		font = pygame.font.SysFont( fn, int(ymax*th), bold=1 )
 		feel = 'Gefühlt:'
