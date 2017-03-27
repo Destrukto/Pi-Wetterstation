@@ -43,17 +43,14 @@ import random
 from pygame.locals import *
 import calendar
 # import serial
+import locale
 
 import pywapi
 import string
 
 from icon_defs import *
 
-# Setup GPIO pin BCM GPIO04
-import RPi.GPIO as GPIO
-GPIO.setmode( GPIO.BCM )
-GPIO.setup( 4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN )	# Next
-GPIO.setup( 17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN )	# Shutdown
+locale.setlocale(locale.LC_TIME, "de_CH.UTF-8")
 
 mouseX, mouseY = 0, 0
 mode = 'w'		# Default to weather mode.
@@ -161,8 +158,8 @@ class SmDisplay:
 		self.scaleIcon = False		# No icon scaling needed.
 		self.iconScale = 1.0
 		self.subwinTh = 0.065		# Sub window text height
-		self.tmdateTh = 0.125		# Time & Date Text Height
-		self.tmdateSmTh = 0.075
+		self.tmdateTh = 0.105		# Time & Date Text Height
+		self.tmdateSmTh = 0.05
 		self.tmdateYPos = 1		# Time & Date Y Position
 		self.tmdateYPosSm = 8		# Time & Date Y Position Small
 		self.errCount = 0
