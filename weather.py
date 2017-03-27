@@ -160,7 +160,7 @@ class SmDisplay:
 		self.ymax = 600 - 5
 		self.scaleIcon = True		# Weather icons need scaling.
 		self.iconScale = 1.5		# Icon scale amount.
-		self.subwinTh = 0.05		# Sub window text height
+		self.subwinTh = 0.045		# Sub window text height
 		self.tmdateTh = 0.100		# Time & Date Text Height
 		self.tmdateSmTh = 0.06
 		self.tmdateYPos = 10		# Time & Date Y Position
