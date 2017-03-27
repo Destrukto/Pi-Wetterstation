@@ -265,7 +265,7 @@ class SmDisplay:
 	def disp_weather(self):
 		# Fill the screen with black
 		self.screen.fill( (0,0,0) )
-		xmin = 10
+		xmin = 5
 		xmax = self.xmax
 		ymax = self.ymax
 		lines = 5
