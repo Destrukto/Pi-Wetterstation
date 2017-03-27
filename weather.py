@@ -630,7 +630,7 @@ def Daylight( sr, st ):
 
 	# From a string like '7:00 AM', build a datetime variable for
 	# today with the hour and minute set to sunrise.
-	t = time.strptime( sr, '%H:%M' )		# Temp Var
+	t = time.strptime( sr, '%I:%M %p' )		# Temp Var
 	tSunrise = tNow					# Copy time now.
 	# Overwrite hour and minute with sunrise hour and minute.
 	tSunrise = tSunrise.replace( hour=t.tm_hour, minute=t.tm_min, second=0 )
