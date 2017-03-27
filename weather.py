@@ -216,10 +216,11 @@ class SmDisplay:
 				self.vis = string.upper( w[cc]['visibility'] )
 				self.gust = string.upper( w[cc]['wind']['gust'] )
 				self.wind_direction = string.upper( w[cc]['wind']['direction'] )
-				self.day[0] = w[f][0]['day_of_week']
-				self.day[1] = w[f][1]['day_of_week']
-				self.day[2] = w[f][2]['day_of_week']
-				self.day[3] = w[f][3]['day_of_week']
+				with setlocale('C'):
+					self.day[0] = time.strptime( w[f][0]['day_of_week'], '%A' )
+					self.day[1] = time.strptime( w[f][1]['day_of_week'], '%A' )
+					self.day[2] = time.strptime( w[f][2]['day_of_week'], '%A' )
+					self.day[3] = time.strptime( w[f][3]['day_of_week'], '%A' )
 				self.sunrise = w[f][0]['sunrise']
 				self.sunset = w[f][0]['sunset']
 				self.icon[0] = getIcon( w, 0 )
@@ -370,7 +371,7 @@ class SmDisplay:
 		rpfont = pygame.font.SysFont( fn, int(ymax*rpth), bold=1 )
 
 		# Sub Window 1
-		txt = font.render( 'Today:', True, lc )
+		txt = font.render( 'Heute:', True, lc )
 		(tx,ty) = txt.get_size()
 		self.screen.blit( txt, (xmax*wx-tx/2,ymax*(wy+gp*0)) )
 		txt = font.render( self.temps[0][0] + ' / ' + self.temps[0][1], True, lc )
@@ -394,7 +395,7 @@ class SmDisplay:
 		self.screen.blit( icon, (xmax*wx-ix/2,ymax*(wy+gp*1.2)+yo) )
 
 		# Sub Window 2
-		txt = font.render( self.day[1]+':', True, lc )
+		txt = font.render(  time.strftime( "%A", self.day[1] )+':', True, lc )
 		(tx,ty) = txt.get_size()
 		self.screen.blit( txt, (xmax*(wx*3)-tx/2,ymax*(wy+gp*0)) )
 		txt = font.render( self.temps[1][0] + ' / ' + self.temps[1][1], True, lc )
@@ -417,7 +418,7 @@ class SmDisplay:
 		self.screen.blit( icon, (xmax*wx*3-ix/2,ymax*(wy+gp*1.2)+yo) )
 
 		# Sub Window 3
-		txt = font.render( self.day[2]+':', True, lc )
+		txt = font.render( time.strftime( "%A", self.day[2] )+':', True, lc )
 		(tx,ty) = txt.get_size()
 		self.screen.blit( txt, (xmax*(wx*5)-tx/2,ymax*(wy+gp*0)) )
 		txt = font.render( self.temps[2][0] + ' / ' + self.temps[2][1], True, lc )
@@ -440,7 +441,7 @@ class SmDisplay:
 		self.screen.blit( icon, (xmax*wx*5-ix/2,ymax*(wy+gp*1.2)+yo) )
 
 		# Sub Window 4
-		txt = font.render( self.day[3]+':', True, lc )
+		txt = font.render( time.strftime( "%A", self.day[3] )+':', True, lc )
 		(tx,ty) = txt.get_size()
 		self.screen.blit( txt, (xmax*(wx*7)-tx/2,ymax*(wy+gp*0)) )
 		txt = font.render( self.temps[3][0] + ' / ' + self.temps[3][1], True, lc )
