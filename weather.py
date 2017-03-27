@@ -328,7 +328,7 @@ class SmDisplay:
 
 		font = pygame.font.SysFont( fn, int(ymax*th), bold=1 )
 		feel = 'Gefühlt:'
-		feel.decode('utf-8')
+		feel = feel.decode('utf-8')
 		txt = font.render( feel, True, lc )
 		self.screen.blit( txt, (xmax*xp,ymax*st) )
 		txt = font.render( self.feels_like, True, lc )
