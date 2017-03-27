@@ -359,7 +359,7 @@ class SmDisplay:
 		txt = font.render( self.baro + baroUnits, True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*3)) )
 
-		txt = font.render( 'Luftfeuchtigkeit:', True, lc )
+		txt = font.render( 'Luftfeuchte:', True, lc )
 		self.screen.blit( txt, (xmax*xp,ymax*(st+gp*4)) )
 		txt = font.render( self.humid+'%', True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*4)) )
