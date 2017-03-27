@@ -173,9 +173,9 @@ class SmDisplay:
 		self.ymax = 320 - 5
 		self.scaleIcon = False		# No icon scaling needed.
 		self.iconScale = 1.0
-		self.subwinTh = 0.065		# Sub window text height
+		self.subwinTh = 0.05		# Sub window text height
 		self.tmdateTh = 0.105		# Time & Date Text Height
-		self.tmdateSmTh = 0.05
+		self.tmdateSmTh = 0.055
 		self.tmdateYPos = 1		# Time & Date Y Position
 		self.tmdateYPosSm = 8		# Time & Date Y Position Small
 		self.errCount = 0
@@ -288,6 +288,7 @@ class SmDisplay:
 		sfont = pygame.font.SysFont( fn, int(ymax*sh), bold=1 )	# Small Font for Seconds
 
 		tm1 = time.strftime( "%a, %d. %b   %H:%M", time.localtime() )	# 1st part
+		tm1 = tm1.decode('utf-8')
 		tm2 = time.strftime( "%S", time.localtime() )					# 2nd
 
 		rtm1 = font.render( tm1, True, lc )
@@ -492,6 +493,7 @@ class SmDisplay:
 		sfont = pygame.font.SysFont( fn, int(ymax*sh), bold=1 )		# Small Font for Seconds
 
 		tm1 = time.strftime( "%a, %d. %b   %H:%M", time.localtime() )	# 1st part
+		tm1 = tm1.decode('utf-8')
 		tm2 = time.strftime( "%S", time.localtime() )			# 2nd
 
 		rtm1 = font.render( tm1, True, lc )
