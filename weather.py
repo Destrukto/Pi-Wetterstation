@@ -136,8 +136,8 @@ class SmDisplay:
 		self.icon = [ 0, 0, 0, 0 ]
 		self.rain = [ '', '', '', '' ]
 		self.temps = [ ['',''], ['',''], ['',''], ['',''] ]
-		self.sunrise = '7:00'
-		self.sunset = '8:00'
+		self.sunrise = '7:00 AM'
+		self.sunset = '8:00 PM'
 		"""
 		# Larger Display
 		self.xmax = 800 - 35
