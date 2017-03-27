@@ -327,7 +327,7 @@ class SmDisplay:
 		x2 = 0.78    # Second Column Xaxis Start Pos
 
 		font = pygame.font.SysFont( fn, int(ymax*th), bold=1 )
-		txt = font.render( 'Windchill:', True, lc )
+		txt = font.render( 'Gefühlt:', True, lc )
 		self.screen.blit( txt, (xmax*xp,ymax*st) )
 		txt = font.render( self.feels_like, True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*st) )
@@ -337,7 +337,7 @@ class SmDisplay:
 		dtxt = dfont.render( uniTmp, True, lc )
 		self.screen.blit( dtxt, (xmax*x2+tx*1.01,ymax*(st+so)) )
 
-		txt = font.render( 'Windspeed:', True, lc )
+		txt = font.render( 'Windgeschw.:', True, lc )
 		self.screen.blit( txt, (xmax*xp,ymax*(st+gp*1)) )
 		if 'calm' in self.wind_speed:
 			windStr = " 0 %s" % windSpeed
@@ -347,7 +347,7 @@ class SmDisplay:
 		txt = font.render( windStr, True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*1)) )
 
-		txt = font.render( 'Direction:', True, lc )
+		txt = font.render( 'Windrichtung:', True, lc )
 		self.screen.blit( txt, (xmax*xp,ymax*(st+gp*2)) )
 		txt = font.render( string.upper(self.wind_dir), True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*2)) )
@@ -357,7 +357,7 @@ class SmDisplay:
 		txt = font.render( self.baro + baroUnits, True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*3)) )
 
-		txt = font.render( 'Humidity:', True, lc )
+		txt = font.render( 'Luftfeuchtigkeit:', True, lc )
 		self.screen.blit( txt, (xmax*xp,ymax*(st+gp*4)) )
 		txt = font.render( self.humid+'%', True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*4)) )
@@ -581,11 +581,11 @@ class SmDisplay:
 		else:          s = "Sonnenaufgang in (H:Min): %d:%02d" % stot( tDaylight )
 		self.sPrint( s, sfont, xmax*0.05, 6, lc )
 
-		s = "Letztes update: %s" % time.strftime( '%d.%m.&%Y %H:%M %Z', self.fLastUpdate )
+		s = "Letztes update: %s" % time.strftime( '%d.%m.%Y %H:%M %Z', self.fLastUpdate )
 		self.sPrint( s, sfont, xmax*0.05, 7, lc )
 
 		cc = 'current_conditions'
-		s = "Current Cond: %s" % self.w[cc]['text']
+		s = "Aktuell: %s" % self.w[cc]['text']
 		self.sPrint( s, sfont, xmax*0.05, 8, lc )
 
 		# Outside Temperature
@@ -595,11 +595,12 @@ class SmDisplay:
 		if self.gust != 'N/A':
 			s = s + '/' + self.gust
 		if self.wind_speed != 'calm':
-			s = s + ' Wind aus: ' + self.wind_direction + unichr(176)
+			s = s + ' Windrichtung: ' + self.wind_direction + unichr(176)
 		self.sPrint( s, sfont, xmax*0.05, 9, lc )
 
 		s = "Visability %smi" % self.vis
-		self.sPrint( s, sfont, xmax*0.05, 10, lc )
+		if self.vis != '':
+			self.sPrint( s, sfont, xmax*0.05, 10, lc )
 
 		# Update the display
 		pygame.display.update()
