@@ -169,7 +169,7 @@ class SmDisplay:
 
 		"""
 		# Small Display
-		self.xmax = 480 - 35
+		self.xmax = 480 - 5
 		self.ymax = 320 - 5
 		self.scaleIcon = False		# No icon scaling needed.
 		self.iconScale = 1.0
