@@ -46,6 +46,24 @@ import calendar
 import pywapi
 import string
 
+import locale
+import threading
+
+from contextlib import contextmanager
+
+
+LOCALE_LOCK = threading.Lock()
+
+@contextmanager
+def setlocale(name):
+    with LOCALE_LOCK:
+        saved = locale.setlocale(locale.LC_ALL)
+        try:
+            yield locale.setlocale(locale.LC_ALL, name)
+        finally:
+            locale.setlocale(locale.LC_ALL, saved)
+
+
 from icon_defs import *
 
 mouseX, mouseY = 0, 0
@@ -54,6 +72,8 @@ mode = 'w'		# Default to weather mode.
 disp_units = "metric"
 #disp_units = "imperial"
 zip_code = 'SZXX7282'
+
+locale.setlocale(locale.LC_ALL, 'de_CH.UTF-8')
 
 # Show degree F symbol using magic unicode char in a smaller font size.
 # The variable uniTmp holds a unicode character that is either DegreeC or DegreeF.
@@ -614,14 +634,16 @@ def Daylight( sr, st ):
 
 	# From a string like '7:00 AM', build a datetime variable for
 	# today with the hour and minute set to sunrise.
-	t = time.strptime( sr, '%I:%M %p' )		# Temp Var
+	with setlocale('C'):
+		t = time.strptime( sr, '%I:%M %p' )		# Temp Var
 	tSunrise = tNow					# Copy time now.
 	# Overwrite hour and minute with sunrise hour and minute.
 	tSunrise = tSunrise.replace( hour=t.tm_hour, minute=t.tm_min, second=0 )
 
 	# From a string like '8:00 PM', build a datetime variable for
 	# today with the hour and minute set to sunset.
-	t = time.strptime( myDisp.sunset, '%I:%M %p' )
+	with setlocale('C'):
+		t = time.strptime( myDisp.sunset, '%I:%M %p' )
 	tSunset = tNow					# Copy time now.
 	# Overwrite hour and minute with sunset hour and minute.
 	tSunset = tSunset.replace( hour=t.tm_hour, minute=t.tm_min, second=0 )
