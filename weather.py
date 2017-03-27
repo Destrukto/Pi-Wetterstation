@@ -208,7 +208,7 @@ class SmDisplay:
 				self.wLastUpdate = w[cc]['last_updated']
 				with setlocale('C'):
 					self.fLastUpdate = time.strptime( w[cc]['last_updated'], '%-m/%-d/%y %I:%M %p %Z' )
-				print "Neues Wetterupdate: " + time.strftime(self.fLastUpdate, '%d.%m.&%Y %H:%M %Z' )
+				print "Neues Wetterupdate: " + time.strftime('%d.%m.&%Y %H:%M %Z', self.fLastUpdate )
 				self.temp = string.lower( w[cc]['temperature'] )
 				self.feels_like = string.lower( w[cc]['feels_like'] )
 				self.wind_speed = string.lower( w[cc]['wind']['speed'] )
