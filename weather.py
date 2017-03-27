@@ -206,7 +206,9 @@ class SmDisplay:
 		try:
 			if ( w[cc]['last_updated'] != self.wLastUpdate ):
 				self.wLastUpdate = w[cc]['last_updated']
-				print "New Weather Update: " + self.wLastUpdate
+				with setlocale('C'):
+					self.fLastUpdate = time.strptime( w[cc]['last_updated'], '%-m/%-d/%y %I:%M %p %Z' )
+				print "Neues Wetterupdate: " + time.strftime(self.fLastUpdate, '%d.%m.&%Y %H:%M %Z' )
 				self.temp = string.lower( w[cc]['temperature'] )
 				self.feels_like = string.lower( w[cc]['feels_like'] )
 				self.wind_speed = string.lower( w[cc]['wind']['speed'] )
@@ -557,6 +559,7 @@ class SmDisplay:
 		sfont = pygame.font.SysFont( fn, int(ymax*sh), bold=1 )		# Small Font
 
 		tm1 = time.strftime( "%a, %d. %b   %H:%M", time.localtime() )	# 1st part
+		tm1 = tm1.decode('utf-8')
 		tm2 = time.strftime( "%S", time.localtime() )			# 2nd
 
 		rtm1 = font.render( tm1, True, lc )
@@ -568,17 +571,17 @@ class SmDisplay:
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
 
-		self.sPrint( "Sunrise: %s" % self.sunrise, sfont, xmax*0.05, 3, lc )
-		self.sPrint( "Sunset: %s" % self.sunset, sfont, xmax*0.05, 4, lc )
+		self.sPrint( "Sonnenaufgang: %s" % self.sunrise, sfont, xmax*0.05, 3, lc )
+		self.sPrint( "Sonnenuntergang: %s" % self.sunset, sfont, xmax*0.05, 4, lc )
 
-		s = "Daylight (Hrs:Min): %d:%02d" % (dayHrs, dayMins)
+		s = "Tageslicht (H:Min): %d:%02d" % (dayHrs, dayMins)
 		self.sPrint( s, sfont, xmax*0.05, 5, lc )
 
-		if inDaylight: s = "Sunset in (Hrs:Min): %d:%02d" % stot( tDarkness )
-		else:          s = "Sunrise in (Hrs:Min): %d:%02d" % stot( tDaylight )
+		if inDaylight: s = "Sonnenuntergang in (H:Min): %d:%02d" % stot( tDarkness )
+		else:          s = "Sonnenaufgang in (H:Min): %d:%02d" % stot( tDaylight )
 		self.sPrint( s, sfont, xmax*0.05, 6, lc )
 
-		s = "Update: %s" % self.wLastUpdate
+		s = "Letztes update: %s" % time.strftime(self.fLastUpdate, '%d.%m.&%Y %H:%M %Z' )
 		self.sPrint( s, sfont, xmax*0.05, 7, lc )
 
 		cc = 'current_conditions'
@@ -586,13 +589,13 @@ class SmDisplay:
 		self.sPrint( s, sfont, xmax*0.05, 8, lc )
 
 		# Outside Temperature
-		s = self.temp + unichr(176) + 'F '
+		s = self.temp + unichr(176) + 'C '
 		s = s + self.baro + baroUnits
-		s = s + 'Wind ' + self.wind_speed
+		s = s + ' Windstufe ' + self.wind_speed
 		if self.gust != 'N/A':
 			s = s + '/' + self.gust
 		if self.wind_speed != 'calm':
-			s = s + 'windSpeed @' + self.wind_direction + unichr(176)
+			s = s + ' Wind aus: ' + self.wind_direction + unichr(176)
 		self.sPrint( s, sfont, xmax*0.05, 9, lc )
 
 		s = "Visability %smi" % self.vis
