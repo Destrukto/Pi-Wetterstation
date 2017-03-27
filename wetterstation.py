@@ -9,7 +9,7 @@ from bluepy.sensortag import SensorTag
 
 
 # configurations to be set accordingly
-SENSORTAG_ADDRESS = "24:71:89:E6:AD:84"
+SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
 FREQUENCY_SECONDS = 54.0
 
 
