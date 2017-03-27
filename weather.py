@@ -398,7 +398,7 @@ class SmDisplay:
 		self.screen.blit( icon, (xmax*wx-ix/2,ymax*(wy+gp*1.2)+yo) )
 
 		# Sub Window 2
-		txt = font.render( time.strftime( '%A', self.day[1] )+':', True, lc )
+		txt = font.render( (time.strftime( '%A', self.day[1] )+':'), True, lc )
 		(tx,ty) = txt.get_size()
 		self.screen.blit( txt, (xmax*(wx*3)-tx/2,ymax*(wy+gp*0)) )
 		txt = font.render( self.temps[1][0] + ' / ' + self.temps[1][1], True, lc )
