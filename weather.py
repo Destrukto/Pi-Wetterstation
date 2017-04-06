@@ -50,12 +50,17 @@ import locale
 import threading
 import Queue
 
-import SensortagAndIoT
+import Sensortag
 
 from contextlib import contextmanager
 
+from Adafruit_IO import *
 
 LOCALE_LOCK = threading.Lock()
+# update der Sensordaten alle 5min (5s um daten an io.adafruit zu übermitteln)
+FREQUENCY_SECONDS = 295.0
+SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
+aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
 
 @contextmanager
 def setlocale(name):
@@ -142,6 +147,19 @@ class SmDisplay:
 		# Render the screen
 		pygame.mouse.set_visible(0)
 		pygame.display.update()
+		# Sensortag
+		print('Connecting to {}'.format(SENSORTAG_ADDRESS))
+		tag = SensorTag(SENSORTAG_ADDRESS)
+		self.readings = get_readings(tag)
+		if not self.readings:
+				print("SensorTag disconnected. Reconnecting.")
+				reconnect(tag)
+				continue
+		aio.send('WeatherTempIr', repr(self.readings["ir_temp"]))
+		aio.send('WeatherHum', repr(self.readings["humidity"]))
+		aio.send('WeatherBaro', repr(self.readings["pressure"]))
+		aio.send('WeatherLux', repr(self.readings["light"]))
+		
 		#for fontname in pygame.font.get_fonts():
 		#        print fontname
 		self.temp = ''
@@ -304,6 +322,32 @@ class SmDisplay:
 		tp = xmax / 2 - (tx1 + tx2) / 2
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
+				m = time.localtime().tm_min
+		
+		if ( (m % 5) == 0 ):
+			
+			#print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
+			#print('Press Ctrl-C to quit.')
+
+			# get sensor readings
+			self.readings = get_readings(tag)
+			if not self.readings:
+				print("SensorTag disconnected. Reconnecting.")
+				reconnect(tag)
+				continue
+
+			# print readings
+			#print("Time:\t{}".format(datetime.datetime.now()))
+			#print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
+			aio.send('WeatherTempIr', repr(self.readings["ir_temp"]))
+			#print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
+			aio.send('WeatherHum', repr(self.readings["humidity"]))
+			#print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
+			aio.send('WeatherBaro', repr(self.readings["pressure"]))
+			#print("Luxmeter reading:\t{}".format(readings["light"]))
+			aio.send('WeatherLux', repr(self.readings["light"]))
+
+			print()
 
 		# Outside Temp
 		font = pygame.font.SysFont( fn, int(ymax*(0.5-0.15)*0.9), bold=1 )
@@ -777,6 +821,7 @@ while running:
 				myDisp.UpdateWeather()
 			except:
 				print "Unhandled Error in UndateWeather."
+
 
 	if ( mode == 'h'):
 		# Pace the screen updates to once per second.
