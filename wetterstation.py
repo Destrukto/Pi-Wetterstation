@@ -6,12 +6,13 @@ import time
 
 from bluepy.btle import BTLEException
 from bluepy.sensortag import SensorTag
+from Adafruit_IO import *
 
 
 # configurations to be set accordingly
 SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
 FREQUENCY_SECONDS = 60.0
-
+aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
 
 def enable_sensors(tag):
     """Enable sensors so that readings can be made."""
@@ -95,6 +96,7 @@ def main():
         # print readings
         print("Time:\t{}".format(datetime.datetime.now()))
         print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
+        aio.send('WeatherTempIr', format(readings["ir"], readings["ir_temp"]))
         print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
         print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
         print("Luxmeter reading:\t{}".format(readings["light"]))
