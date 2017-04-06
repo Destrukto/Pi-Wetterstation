@@ -98,8 +98,11 @@ def main():
         print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
         aio.send('WeatherTempIr', repr(readings["ir_temp"]))
         print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
+        aio.send('WeatherHum', repr(readings["humidity"]))
         print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
+        aio.send('WeatherBaro', repr(readings["pressure"]))
         print("Luxmeter reading:\t{}".format(readings["light"]))
+        aio.send('WeatherLux', repr(readings["light"]))
 
         print()
         time.sleep(FREQUENCY_SECONDS)
