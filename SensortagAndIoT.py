@@ -3,6 +3,7 @@ from __future__ import print_function
 import datetime
 import sys
 import time
+import Queue
 
 from bluepy.btle import BTLEException
 from bluepy.sensortag import SensorTag
