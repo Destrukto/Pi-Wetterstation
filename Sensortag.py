@@ -3,18 +3,13 @@ from __future__ import print_function
 import datetime
 import sys
 import time
-import Queue
 
 from bluepy.btle import BTLEException
 from bluepy.sensortag import SensorTag
-from Adafruit_IO import *
 
 
 # configurations to be set accordingly
-SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
-# update alle 5min (5s um sensordaten an io.adafruit zu übermitteln)
-FREQUENCY_SECONDS = 295.0
-aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
+
 
 def enable_sensors(tag):
     """Enable sensors so that readings can be made."""
@@ -80,31 +75,4 @@ def reconnect(tag):
         print("Unable to reconnect to SensorTag.")
         raise e
 
-
-def readAndstoreSensorDate():
-    print('Connecting to {}'.format(SENSORTAG_ADDRESS))
-    tag = SensorTag(SENSORTAG_ADDRESS)
-
-    print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
-    #print('Press Ctrl-C to quit.')
     
-    # get sensor readings
-    readings = get_readings(tag)
-    if not readings:
-        print("SensorTag disconnected. Reconnecting.")
-        reconnect(tag)
-        continue
-
-    # print readings
-    #print("Time:\t{}".format(datetime.datetime.now()))
-    #print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
-    aio.send('WeatherTempIr', repr(readings["ir_temp"]))
-    #print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
-    aio.send('WeatherHum', repr(readings["humidity"]))
-    #print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
-    aio.send('WeatherBaro', repr(readings["pressure"]))
-    #print("Luxmeter reading:\t{}".format(readings["light"]))
-    aio.send('WeatherLux', repr(readings["light"]))
-
-    print()
-    time.sleep(FREQUENCY_SECONDS)
