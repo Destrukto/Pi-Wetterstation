@@ -48,6 +48,9 @@ import string
 
 import locale
 import threading
+import Queue
+
+import SensortagAndIoT
 
 from contextlib import contextmanager
 
