@@ -11,7 +11,7 @@ from Adafruit_IO import *
 
 # configurations to be set accordingly
 SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
-FREQUENCY_SECONDS = 60.0
+FREQUENCY_SECONDS = 57.0
 aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
 
 def enable_sensors(tag):
