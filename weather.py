@@ -280,6 +280,7 @@ class SmDisplay:
 			print "ValueError -> Weather Error"
 			
 		try:
+			m = time.localtime().tm_min
 			if ( (m % 5) == 0 ):
 
 				#print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
@@ -359,7 +360,6 @@ class SmDisplay:
 		tp = xmax / 2 - (tx1 + tx2) / 2
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
-				m = time.localtime().tm_min
 		
 		# Outside Temp
 		font = pygame.font.SysFont( fn, int(ymax*(0.5-0.15)*0.9), bold=1 )
