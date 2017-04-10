@@ -249,8 +249,8 @@ class SmDisplay:
 					self.day[1] = time.strptime( w[f][1]['day_of_week'], '%A' )
 					self.day[2] = time.strptime( w[f][2]['day_of_week'], '%A' )
 					self.day[3] = time.strptime( w[f][3]['day_of_week'], '%A' )
-				self.sunrise = w[f][0]['sunrise']
-				self.sunset = w[f][0]['sunset']
+					self.sunrise = time.strptime( w[f][0]['sunrise'], '%I:%M %p' )
+					self.sunset = time.strptime( w[f][0]['sunset'], '%I:%M %p' )
 				self.icon[0] = getIcon( w, 0 )
 				self.icon[1] = getIcon( w, 1 )
 				self.icon[2] = getIcon( w, 2 )
@@ -636,8 +636,8 @@ class SmDisplay:
 		self.screen.blit( rtm1, (tp,self.tmdateYPos) )
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
 
-		self.sPrint( "Sonnenaufgang: %s" % self.sunrise, sfont, xmax*0.05, 3, lc )
-		self.sPrint( "Sonnenuntergang: %s" % self.sunset, sfont, xmax*0.05, 4, lc )
+		self.sPrint( "Sonnenaufgang: %s" % time.strftime('%H:%M', self.sunrise ), sfont, xmax*0.05, 3, lc )
+		self.sPrint( "Sonnenuntergang: %s" % time.strftime('%H:%M', self.sunset ), sfont, xmax*0.05, 4, lc )
 
 		s = "Tageslicht (H:Min): %d:%02d" % (dayHrs, dayMins)
 		self.sPrint( s, sfont, xmax*0.05, 5, lc )
@@ -656,14 +656,14 @@ class SmDisplay:
 		# Outside Temperature
 		s = self.temp + unichr(176) + 'C '
 		s = s + self.baro + baroUnits
-		s = s + ' Windstufe ' + self.wind_speed
+		s = s + ' Windgeschw. ' + self.wind_speed + 'km/h'
 		if self.gust != 'N/A':
 			s = s + '/' + self.gust
 		if self.wind_speed != 'calm':
 			s = s + ' Windrichtung: ' + self.wind_direction + unichr(176)
 		self.sPrint( s, sfont, xmax*0.05, 9, lc )
 
-		s = "Visability %smi" % self.vis
+		s = "Sichtweite %skm" % self.vis
 		if self.vis != '':
 			self.sPrint( s, sfont, xmax*0.05, 10, lc )
 
