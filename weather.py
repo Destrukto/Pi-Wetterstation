@@ -450,7 +450,7 @@ class SmDisplay:
 		icon = pygame.image.load(sd + icons[self.icon[0]]).convert_alpha()
 		(ix,iy) = icon.get_size()
 		if self.scaleIcon:
-			icon2 = pygame.transform.scale( icon, (int(ix*1.5),int(iy*1.5)) )
+			icon2 = pygame.transform.scale( icon, (int(ix*self.iconScale),int(iy*self.iconScale)) )
 			(ix,iy) = icon2.get_size()
 			icon = icon2
 		if ( iy < 90 ):
@@ -473,7 +473,7 @@ class SmDisplay:
 		icon = pygame.image.load(sd + icons[self.icon[1]]).convert_alpha()
 		(ix,iy) = icon.get_size()
 		if self.scaleIcon:
-			icon2 = pygame.transform.scale( icon, (int(ix*1.5),int(iy*1.5)) )
+			icon2 = pygame.transform.scale( icon, (int(ix*self.iconScale),int(iy*self.iconScale)) )
 			(ix,iy) = icon2.get_size()
 			icon = icon2
 		if ( iy < 90 ):
@@ -496,7 +496,7 @@ class SmDisplay:
 		icon = pygame.image.load(sd + icons[self.icon[2]]).convert_alpha()
 		(ix,iy) = icon.get_size()
 		if self.scaleIcon:
-			icon2 = pygame.transform.scale( icon, (int(ix*1.5),int(iy*1.5)) )
+			icon2 = pygame.transform.scale( icon, (int(ix*self.iconScale),int(iy*self.iconScale)) )
 			(ix,iy) = icon2.get_size()
 			icon = icon2
 		if ( iy < 90 ):
@@ -519,7 +519,7 @@ class SmDisplay:
 		icon = pygame.image.load(sd + icons[self.icon[3]]).convert_alpha()
 		(ix,iy) = icon.get_size()
 		if self.scaleIcon:
-			icon2 = pygame.transform.scale( icon, (int(ix*1.5),int(iy*1.5)) )
+			icon2 = pygame.transform.scale( icon, (int(ix*self.iconScale),int(iy*self.iconScale)) )
 			(ix,iy) = icon2.get_size()
 			icon = icon2
 		if ( iy < 90 ):
