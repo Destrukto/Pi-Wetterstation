@@ -196,7 +196,7 @@ class SmDisplay:
 		"""
 		# Small Display
 		self.xmax = 480 - 5
-		self.ymax = 320 - 5
+		self.ymax = 320 - 10
 		self.scaleIcon = True		# No icon scaling needed.
 		self.iconScale = 0.8
 		self.subwinTh = 0.06		# Sub window text height
@@ -328,7 +328,7 @@ class SmDisplay:
 	def disp_weather(self):
 		# Fill the screen with black
 		self.screen.fill( (0,0,0) )
-		xmin = 10
+		xmin = 5
 		xmax = self.xmax
 		ymax = self.ymax
 		lines = 5
@@ -538,7 +538,7 @@ class SmDisplay:
 	def disp_calendar(self):
 		# Fill the screen with black
 		self.screen.fill( (0,0,0) )
-		xmin = 10
+		xmin = 5
 		xmax = self.xmax
 		ymax = self.ymax
 		lines = 5
@@ -603,7 +603,7 @@ class SmDisplay:
 		self.screen.fill( (0,0,0) )
 		xmax = self.xmax
 		ymax = self.ymax
-		xmin = 10
+		xmin = 5
 		lines = 5
 		lc = (255,255,255)
 		sfn = "freemono"
