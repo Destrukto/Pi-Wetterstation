@@ -152,10 +152,10 @@ class SmDisplay:
 		# Sensortag
 		print('Connecting to {}'.format(SENSORTAG_ADDRESS))
 		tag = SensorTag(SENSORTAG_ADDRESS)
-		self.readings = get_readings(tag)
+		self.readings = Sensortag.get_readings(tag)
 		if not self.readings:
 			print("SensorTag disconnected. Reconnecting.")
-			reconnect(tag)
+			Sensortag.reconnect(tag)
 		
 		aio.send('WeatherTempIr', repr(self.readings["ir_temp"]))
 		aio.send('WeatherHum', repr(self.readings["humidity"]))
@@ -289,10 +289,10 @@ class SmDisplay:
 				#print('Press Ctrl-C to quit.')
 
 				# get sensor readings
-				self.readings = get_readings(tag)
+				self.readings = Sensortag.get_readings(tag)
 				if not self.readings:
 					print("SensorTag disconnected. Reconnecting.")
-					reconnect(tag)
+					Sensortag.reconnect(tag)
 
 				# print readings
 				#print("Time:\t{}".format(datetime.datetime.now()))
