@@ -158,18 +158,21 @@ class SmDisplay:
 			Sensortag.reconnect(self.tag)
 		
 		aio.send('WeatherHum', repr(self.readings["humidity"]))
-		aio.send('WeatherTempIr', repr(self.readings["humidity_temp"]))
+		aio.send('WeatherTemp', repr(self.readings["humidity_temp"]))
+		self.humid = repr(self.readings["humidity"])
+		self.temp = repr(int(round(self.readings["humidity_temp"])))
 		aio.send('WeatherBaro', repr(self.readings["pressure"]))
+		self.baro = repr(self.readings["pressure"])
 		aio.send('WeatherLux', repr(self.readings["light"]))
 		
 		#for fontname in pygame.font.get_fonts():
 		#        print fontname
-		self.temp = ''
+		#self.temp = ''
 		self.feels_like = '0'
 		self.wind_speed = '0'
-		self.baro = '29.95'
+		#self.baro = '29.95'
 		self.wind_dir = 'S'
-		self.humid = '50.0'
+		#self.humid = '50.0'
 		self.wLastUpdate = ''
 		self.day = [ '', '', '', '' ]
 		self.icon = [ 0, 0, 0, 0 ]
@@ -232,12 +235,12 @@ class SmDisplay:
 				with setlocale('C'):
 					self.fLastUpdate = time.strptime( w[cc]['last_updated'], '%m/%d/%y %I:%M %p %Z' )
 				print "Neues Wetterupdate: " + time.strftime('%d.%m.&%Y %H:%M %Z', self.fLastUpdate )
-				self.temp = string.lower( w[cc]['temperature'] )
+				#self.temp = string.lower( w[cc]['temperature'] )
 				self.feels_like = string.lower( w[cc]['feels_like'] )
 				self.wind_speed = string.lower( w[cc]['wind']['speed'] )
-				self.baro = string.lower( w[cc]['barometer']['reading'] )
+				#self.baro = string.lower( w[cc]['barometer']['reading'] )
 				self.wind_dir = string.upper( w[cc]['wind']['text'] )
-				self.humid = string.upper( w[cc]['humidity'] )
+				#self.humid = string.upper( w[cc]['humidity'] )
 				self.vis = string.upper( w[cc]['visibility'] )
 				self.gust = string.upper( w[cc]['wind']['gust'] )
 				self.wind_direction = string.upper( w[cc]['wind']['direction'] )
@@ -299,9 +302,9 @@ class SmDisplay:
 				#print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
 				#print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
 				aio.send('WeatherHum', repr(self.readings["humidity"]))
-				aio.send('WeatherTempIr', repr(self.readings["humidity_temp"]))
+				aio.send('WeatherTemp', repr(self.readings["humidity_temp"]))
 				self.humid = repr(self.readings["humidity"])
-				self.temp = repr(self.readings["humidity_temp"])
+				self.temp = repr(int(round(self.readings["humidity_temp"])))
 				#print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
 				aio.send('WeatherBaro', repr(self.readings["pressure"]))
 				self.baro = repr(self.readings["pressure"])
@@ -325,7 +328,7 @@ class SmDisplay:
 	def disp_weather(self):
 		# Fill the screen with black
 		self.screen.fill( (0,0,0) )
-		xmin = 10
+		xmin = 5
 		xmax = self.xmax
 		ymax = self.ymax
 		lines = 5
@@ -424,7 +427,7 @@ class SmDisplay:
 		txt = font.render( self.humid+'%', True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*4)) )
 
-		wx = 	0.125			# Sub Window Centers
+		wx = 	0.1			# Sub Window Centers
 		wy = 	0.510			# Sub Windows Yaxis Start
 		th = 	self.subwinTh		# Text Height
 		rpth = 	0.100			# Rain Present Text Height
