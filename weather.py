@@ -427,7 +427,7 @@ class SmDisplay:
 		txt = font.render( self.humid+'%', True, lc )
 		self.screen.blit( txt, (xmax*x2,ymax*(st+gp*4)) )
 
-		wx = 	0.1			# Sub Window Centers
+		wx = 	0.125			# Sub Window Centers
 		wy = 	0.510			# Sub Windows Yaxis Start
 		th = 	self.subwinTh		# Text Height
 		rpth = 	0.100			# Rain Present Text Height
