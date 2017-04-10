@@ -706,19 +706,19 @@ def Daylight( sr, st ):
 
 	# From a string like '7:00 AM', build a datetime variable for
 	# today with the hour and minute set to sunrise.
-	with setlocale('C'):
-		t = time.strptime( sr, '%I:%M %p' )		# Temp Var
+	#with setlocale('C'):
+	#	t = time.strptime( sr, '%I:%M %p' )		# Temp Var
 	tSunrise = tNow					# Copy time now.
 	# Overwrite hour and minute with sunrise hour and minute.
-	tSunrise = tSunrise.replace( hour=t.tm_hour, minute=t.tm_min, second=0 )
+	tSunrise = tSunrise.replace( hour=sr.tm_hour, minute=sr.tm_min, second=0 )
 
 	# From a string like '8:00 PM', build a datetime variable for
 	# today with the hour and minute set to sunset.
-	with setlocale('C'):
-		t = time.strptime( myDisp.sunset, '%I:%M %p' )
+	#with setlocale('C'):
+	#	t = time.strptime( myDisp.sunset, '%I:%M %p' )
 	tSunset = tNow					# Copy time now.
 	# Overwrite hour and minute with sunset hour and minute.
-	tSunset = tSunset.replace( hour=t.tm_hour, minute=t.tm_min, second=0 )
+	tSunset = tSunset.replace( hour=st.tm_hour, minute=st.tm_min, second=0 )
 
 	# Test if current time is between sunrise and sunset.
 	if (tNow > tSunrise) and (tNow < tSunset):
