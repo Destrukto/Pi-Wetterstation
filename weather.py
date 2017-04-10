@@ -151,14 +151,14 @@ class SmDisplay:
 		pygame.display.update()
 		# Sensortag
 		print('Connecting to {}'.format(SENSORTAG_ADDRESS))
-		tag = SensorTag(SENSORTAG_ADDRESS)
-		self.readings = Sensortag.get_readings(tag)
+		self.tag = SensorTag(SENSORTAG_ADDRESS)
+		self.readings = Sensortag.get_readings(self.tag)
 		if not self.readings:
 			print("SensorTag disconnected. Reconnecting.")
-			Sensortag.reconnect(tag)
+			Sensortag.reconnect(self.tag)
 		
-		aio.send('WeatherTempIr', repr(self.readings["ir_temp"]))
 		aio.send('WeatherHum', repr(self.readings["humidity"]))
+		aio.send('WeatherTempIr', repr(self.readings["humidity_temp"]))
 		aio.send('WeatherBaro', repr(self.readings["pressure"]))
 		aio.send('WeatherLux', repr(self.readings["light"]))
 		
@@ -194,8 +194,8 @@ class SmDisplay:
 		# Small Display
 		self.xmax = 480 - 5
 		self.ymax = 320 - 5
-		self.scaleIcon = False		# No icon scaling needed.
-		self.iconScale = 1.0
+		self.scaleIcon = True		# No icon scaling needed.
+		self.iconScale = 0.8
 		self.subwinTh = 0.06		# Sub window text height
 		self.tmdateTh = 0.105		# Time & Date Text Height
 		self.tmdateSmTh = 0.06
@@ -289,10 +289,10 @@ class SmDisplay:
 				#print('Press Ctrl-C to quit.')
 
 				# get sensor readings
-				self.readings = Sensortag.get_readings(tag)
+				self.readings = Sensortag.get_readings(self.tag)
 				if not self.readings:
 					print("SensorTag disconnected. Reconnecting.")
-					Sensortag.reconnect(tag)
+					Sensortag.reconnect(self.tag)
 
 				# print readings
 				#print("Time:\t{}".format(datetime.datetime.now()))
