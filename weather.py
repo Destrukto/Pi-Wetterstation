@@ -202,7 +202,7 @@ class SmDisplay:
 		self.subwinTh = 0.06		# Sub window text height
 		self.tmdateTh = 0.105		# Time & Date Text Height
 		self.tmdateSmTh = 0.06
-		self.tmdateYPos = 1		# Time & Date Y Position
+		self.tmdateYPos = 3		# Time & Date Y Position
 		self.tmdateYPosSm = 8		# Time & Date Y Position Small
 		self.errCount = 0
 
