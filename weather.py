@@ -54,6 +54,8 @@ import Sensortag
 
 from contextlib import contextmanager
 
+from bluepy.sensortag import SensorTag
+
 from Adafruit_IO import *
 
 LOCALE_LOCK = threading.Lock()
