@@ -268,6 +268,7 @@ class SmDisplay:
 				self.temps[3][0] = w[f][3]['high'] + uniTmp
 				self.temps[3][1] = w[f][3]['low'] + uniTmp
 			self.errCount = 0
+			
 
 		except KeyError:
 			print "KeyError -> Weather Error"
@@ -277,6 +278,42 @@ class SmDisplay:
 			return False
 		except ValueError:
 			print "ValueError -> Weather Error"
+			
+		try:
+			if ( (m % 5) == 0 ):
+
+				#print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
+				#print('Press Ctrl-C to quit.')
+
+				# get sensor readings
+				self.readings = get_readings(tag)
+				if not self.readings:
+					print("SensorTag disconnected. Reconnecting.")
+					reconnect(tag)
+					continue
+
+				# print readings
+				#print("Time:\t{}".format(datetime.datetime.now()))
+				#print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
+				#print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
+				aio.send('WeatherHum', repr(self.readings["humidity"]))
+				aio.send('WeatherTempIr', repr(self.readings["humidity_temp"]))
+				self.humid = repr(self.readings["humidity"])
+				self.temp = repr(self.readings["humidity_temp"])
+				#print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
+				aio.send('WeatherBaro', repr(self.readings["pressure"]))
+				self.baro = repr(self.readings["pressure"])
+				#print("Luxmeter reading:\t{}".format(readings["light"]))
+				aio.send('WeatherLux', repr(self.readings["light"]))
+
+				print()
+
+		except:
+			print "Error getting update from sensortag"
+			self.errCount += 1
+			return
+			
+
 
 		return True
 
@@ -324,31 +361,6 @@ class SmDisplay:
 		self.screen.blit( rtm2, (tp+tx1+3,self.tmdateYPosSm) )
 				m = time.localtime().tm_min
 		
-		if ( (m % 5) == 0 ):
-			
-			#print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
-			#print('Press Ctrl-C to quit.')
-
-			# get sensor readings
-			self.readings = get_readings(tag)
-			if not self.readings:
-				print("SensorTag disconnected. Reconnecting.")
-				reconnect(tag)
-				continue
-
-			# print readings
-			#print("Time:\t{}".format(datetime.datetime.now()))
-			#print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
-			aio.send('WeatherTempIr', repr(self.readings["ir_temp"]))
-			#print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
-			aio.send('WeatherHum', repr(self.readings["humidity"]))
-			#print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
-			aio.send('WeatherBaro', repr(self.readings["pressure"]))
-			#print("Luxmeter reading:\t{}".format(readings["light"]))
-			aio.send('WeatherLux', repr(self.readings["light"]))
-
-			print()
-
 		# Outside Temp
 		font = pygame.font.SysFont( fn, int(ymax*(0.5-0.15)*0.9), bold=1 )
 		txt = font.render( self.temp, True, lc )
