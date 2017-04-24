@@ -139,7 +139,7 @@ class SmDisplay:
 		if not found:
 			raise Exception('No suitable video driver found!')
 
-		size = ((480,320)) #(pygame.display.Info().current_w, pygame.display.Info().current_h)
+		size = (pygame.display.Info().current_w, pygame.display.Info().current_h)
 		print "Framebuffer Size: %d x %d" % (size[0], size[1])
 		self.screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
 		# Clear the screen to start
