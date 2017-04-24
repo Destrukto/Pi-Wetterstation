@@ -9,6 +9,9 @@ sudo apt install python-pip virtualenvwrapper libglib2.0-dev python-dev build-es
 mkvirtualenv wetterstation  # OPTIONAL: virtualenv erstellen
 pip install bluepy adafruit-io requests[security]
 ```
+und pywapi installieren:
+https://code.google.com/archive/p/python-weather-api/
+
 ## Sourcen
 http://www.instructables.com/id/Raspberry-Pi-Internet-Weather-Station/?ALLSTEPS
 
