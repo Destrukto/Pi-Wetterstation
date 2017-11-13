@@ -60,7 +60,7 @@ from Adafruit_IO import *
 
 LOCALE_LOCK = threading.Lock()
 # update der Sensordaten alle 5min (5s um daten an io.adafruit zu übermitteln)
-FREQUENCY_SECONDS = 295.0
+#FREQUENCY_SECONDS = 295.0
 SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
 aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
 
@@ -286,7 +286,7 @@ class SmDisplay:
 			
 		try:
 			m = time.localtime().tm_min
-			if ( (m % 5) == 0 ):
+			if ( (m % 30) == 0 ):
 
 				#print('Logging sensor measurements every {0} seconds.'.format(FREQUENCY_SECONDS))
 				#print('Press Ctrl-C to quit.')
