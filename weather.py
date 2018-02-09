@@ -62,7 +62,7 @@ LOCALE_LOCK = threading.Lock()
 # update der Sensordaten alle 5min (5s um daten an io.adafruit zu übermitteln)
 #FREQUENCY_SECONDS = 295.0
 SENSORTAG_ADDRESS = "24:71:89:BD:10:01"
-aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
+#aio = Client('7694b7ba068142a3a0c2afaadffc9d53')
 
 @contextmanager
 def setlocale(name):
@@ -157,13 +157,13 @@ class SmDisplay:
 			print("SensorTag disconnected. Reconnecting.")
 			Sensortag.reconnect(self.tag)
 		
-		aio.send('WeatherHum', repr(self.readings["humidity"]))
-		aio.send('WeatherTemp', repr(self.readings["humidity_temp"]))
+		#aio.send('WeatherHum', repr(self.readings["humidity"]))
+		#aio.send('WeatherTemp', repr(self.readings["humidity_temp"]))
 		self.humid = repr(self.readings["humidity"])
 		self.temp = repr(int(round(self.readings["humidity_temp"])))
-		aio.send('WeatherBaro', repr(self.readings["pressure"]))
+		#aio.send('WeatherBaro', repr(self.readings["pressure"]))
 		self.baro = repr(self.readings["pressure"])
-		aio.send('WeatherLux', repr(self.readings["light"]))
+		#aio.send('WeatherLux', repr(self.readings["light"]))
 		
 		#for fontname in pygame.font.get_fonts():
 		#        print fontname
@@ -301,15 +301,15 @@ class SmDisplay:
 				#print("Time:\t{}".format(datetime.datetime.now()))
 				#print("IR reading:\t\t{}, temperature:\t{}".format(readings["ir"], readings["ir_temp"]))
 				#print("Humidity reading:\t{}, temperature:\t{}".format(readings["humidity"], readings["humidity_temp"]))
-				aio.send('WeatherHum', repr(self.readings["humidity"]))
-				aio.send('WeatherTemp', repr(self.readings["humidity_temp"]))
+				#aio.send('WeatherHum', repr(self.readings["humidity"]))
+				#aio.send('WeatherTemp', repr(self.readings["humidity_temp"]))
 				self.humid = repr(self.readings["humidity"])
 				self.temp = repr(int(round(self.readings["humidity_temp"])))
 				#print("Barometer reading:\t{}, temperature:\t{}".format(readings["pressure"], readings["baro_temp"]))
-				aio.send('WeatherBaro', repr(self.readings["pressure"]))
+				#aio.send('WeatherBaro', repr(self.readings["pressure"]))
 				self.baro = repr(self.readings["pressure"])
 				#print("Luxmeter reading:\t{}".format(readings["light"]))
-				aio.send('WeatherLux', repr(self.readings["light"]))
+				#aio.send('WeatherLux', repr(self.readings["light"]))
 
 				print()
 
